@@ -25,3 +25,8 @@ type Comment @model {
   content: String
   post: Post
 }
+
+type Something @model {
+  id: ID!
+  whatabout: String
+}

@@ -196,3 +196,30 @@ export const listComments = /* GraphQL */ `
     }
   }
 `;
+export const getSomething = /* GraphQL */ `
+  query GetSomething($id: ID!) {
+    getSomething(id: $id) {
+      id
+      whatabout
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSomethings = /* GraphQL */ `
+  query ListSomethings(
+    $filter: ModelSomethingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSomethings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        whatabout
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

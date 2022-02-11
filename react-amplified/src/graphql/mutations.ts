@@ -341,3 +341,42 @@ export const deleteComment = /* GraphQL */ `
     }
   }
 `;
+export const createSomething = /* GraphQL */ `
+  mutation CreateSomething(
+    $input: CreateSomethingInput!
+    $condition: ModelSomethingConditionInput
+  ) {
+    createSomething(input: $input, condition: $condition) {
+      id
+      whatabout
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSomething = /* GraphQL */ `
+  mutation UpdateSomething(
+    $input: UpdateSomethingInput!
+    $condition: ModelSomethingConditionInput
+  ) {
+    updateSomething(input: $input, condition: $condition) {
+      id
+      whatabout
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSomething = /* GraphQL */ `
+  mutation DeleteSomething(
+    $input: DeleteSomethingInput!
+    $condition: ModelSomethingConditionInput
+  ) {
+    deleteSomething(input: $input, condition: $condition) {
+      id
+      whatabout
+      createdAt
+      updatedAt
+    }
+  }
+`;

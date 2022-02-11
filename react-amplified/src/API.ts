@@ -166,6 +166,35 @@ export type DeleteCommentInput = {
   id: string,
 };
 
+export type CreateSomethingInput = {
+  id?: string | null,
+  whatabout?: string | null,
+};
+
+export type ModelSomethingConditionInput = {
+  whatabout?: ModelStringInput | null,
+  and?: Array< ModelSomethingConditionInput | null > | null,
+  or?: Array< ModelSomethingConditionInput | null > | null,
+  not?: ModelSomethingConditionInput | null,
+};
+
+export type Something = {
+  __typename: "Something",
+  id: string,
+  whatabout?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateSomethingInput = {
+  id: string,
+  whatabout?: string | null,
+};
+
+export type DeleteSomethingInput = {
+  id: string,
+};
+
 export type ModelTodoFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -236,6 +265,20 @@ export type ModelCommentFilterInput = {
 export type ModelCommentConnection = {
   __typename: "ModelCommentConnection",
   items:  Array<Comment | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSomethingFilterInput = {
+  id?: ModelIDInput | null,
+  whatabout?: ModelStringInput | null,
+  and?: Array< ModelSomethingFilterInput | null > | null,
+  or?: Array< ModelSomethingFilterInput | null > | null,
+  not?: ModelSomethingFilterInput | null,
+};
+
+export type ModelSomethingConnection = {
+  __typename: "ModelSomethingConnection",
+  items:  Array<Something | null >,
   nextToken?: string | null,
 };
 
@@ -632,6 +675,51 @@ export type DeleteCommentMutation = {
   } | null,
 };
 
+export type CreateSomethingMutationVariables = {
+  input: CreateSomethingInput,
+  condition?: ModelSomethingConditionInput | null,
+};
+
+export type CreateSomethingMutation = {
+  createSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSomethingMutationVariables = {
+  input: UpdateSomethingInput,
+  condition?: ModelSomethingConditionInput | null,
+};
+
+export type UpdateSomethingMutation = {
+  updateSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSomethingMutationVariables = {
+  input: DeleteSomethingInput,
+  condition?: ModelSomethingConditionInput | null,
+};
+
+export type DeleteSomethingMutation = {
+  deleteSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetTodoQueryVariables = {
   id: string,
 };
@@ -861,6 +949,40 @@ export type ListCommentsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetSomethingQueryVariables = {
+  id: string,
+};
+
+export type GetSomethingQuery = {
+  getSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSomethingsQueryVariables = {
+  filter?: ModelSomethingFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSomethingsQuery = {
+  listSomethings?:  {
+    __typename: "ModelSomethingConnection",
+    items:  Array< {
+      __typename: "Something",
+      id: string,
+      whatabout?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1196,6 +1318,36 @@ export type OnDeleteCommentSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSomethingSubscription = {
+  onCreateSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSomethingSubscription = {
+  onUpdateSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSomethingSubscription = {
+  onDeleteSomething?:  {
+    __typename: "Something",
+    id: string,
+    whatabout?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
