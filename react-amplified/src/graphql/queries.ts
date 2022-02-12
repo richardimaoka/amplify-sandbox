@@ -223,3 +223,42 @@ export const listSomethings = /* GraphQL */ `
     }
   }
 `;
+export const getInventory = /* GraphQL */ `
+  query GetInventory($productID: ID!, $warehouseID: ID!) {
+    getInventory(productID: $productID, warehouseID: $warehouseID) {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listInventories = /* GraphQL */ `
+  query ListInventories(
+    $productID: ID
+    $warehouseID: ModelIDKeyConditionInput
+    $filter: ModelInventoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listInventories(
+      productID: $productID
+      warehouseID: $warehouseID
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        productID
+        warehouseID
+        InventoryAmount
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

@@ -380,3 +380,45 @@ export const deleteSomething = /* GraphQL */ `
     }
   }
 `;
+export const createInventory = /* GraphQL */ `
+  mutation CreateInventory(
+    $input: CreateInventoryInput!
+    $condition: ModelInventoryConditionInput
+  ) {
+    createInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateInventory = /* GraphQL */ `
+  mutation UpdateInventory(
+    $input: UpdateInventoryInput!
+    $condition: ModelInventoryConditionInput
+  ) {
+    updateInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteInventory = /* GraphQL */ `
+  mutation DeleteInventory(
+    $input: DeleteInventoryInput!
+    $condition: ModelInventoryConditionInput
+  ) {
+    deleteInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;

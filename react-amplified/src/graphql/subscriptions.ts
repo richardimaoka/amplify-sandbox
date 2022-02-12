@@ -335,3 +335,36 @@ export const onDeleteSomething = /* GraphQL */ `
     }
   }
 `;
+export const onCreateInventory = /* GraphQL */ `
+  subscription OnCreateInventory {
+    onCreateInventory {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateInventory = /* GraphQL */ `
+  subscription OnUpdateInventory {
+    onUpdateInventory {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteInventory = /* GraphQL */ `
+  subscription OnDeleteInventory {
+    onDeleteInventory {
+      productID
+      warehouseID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;

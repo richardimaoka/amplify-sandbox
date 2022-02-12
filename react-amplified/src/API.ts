@@ -195,6 +195,51 @@ export type DeleteSomethingInput = {
   id: string,
 };
 
+export type CreateInventoryInput = {
+  productID: string,
+  warehouseID: string,
+  InventoryAmount: number,
+};
+
+export type ModelInventoryConditionInput = {
+  InventoryAmount?: ModelIntInput | null,
+  and?: Array< ModelInventoryConditionInput | null > | null,
+  or?: Array< ModelInventoryConditionInput | null > | null,
+  not?: ModelInventoryConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Inventory = {
+  __typename: "Inventory",
+  productID: string,
+  warehouseID: string,
+  InventoryAmount: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateInventoryInput = {
+  productID: string,
+  warehouseID: string,
+  InventoryAmount?: number | null,
+};
+
+export type DeleteInventoryInput = {
+  productID: string,
+  warehouseID: string,
+};
+
 export type ModelTodoFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -279,6 +324,37 @@ export type ModelSomethingFilterInput = {
 export type ModelSomethingConnection = {
   __typename: "ModelSomethingConnection",
   items:  Array<Something | null >,
+  nextToken?: string | null,
+};
+
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export type ModelInventoryFilterInput = {
+  productID?: ModelIDInput | null,
+  warehouseID?: ModelIDInput | null,
+  InventoryAmount?: ModelIntInput | null,
+  and?: Array< ModelInventoryFilterInput | null > | null,
+  or?: Array< ModelInventoryFilterInput | null > | null,
+  not?: ModelInventoryFilterInput | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelInventoryConnection = {
+  __typename: "ModelInventoryConnection",
+  items:  Array<Inventory | null >,
   nextToken?: string | null,
 };
 
@@ -720,6 +796,54 @@ export type DeleteSomethingMutation = {
   } | null,
 };
 
+export type CreateInventoryMutationVariables = {
+  input: CreateInventoryInput,
+  condition?: ModelInventoryConditionInput | null,
+};
+
+export type CreateInventoryMutation = {
+  createInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateInventoryMutationVariables = {
+  input: UpdateInventoryInput,
+  condition?: ModelInventoryConditionInput | null,
+};
+
+export type UpdateInventoryMutation = {
+  updateInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteInventoryMutationVariables = {
+  input: DeleteInventoryInput,
+  condition?: ModelInventoryConditionInput | null,
+};
+
+export type DeleteInventoryMutation = {
+  deleteInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetTodoQueryVariables = {
   id: string,
 };
@@ -983,6 +1107,46 @@ export type ListSomethingsQuery = {
       __typename: "Something",
       id: string,
       whatabout?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetInventoryQueryVariables = {
+  productID: string,
+  warehouseID: string,
+};
+
+export type GetInventoryQuery = {
+  getInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListInventoriesQueryVariables = {
+  productID?: string | null,
+  warehouseID?: ModelIDKeyConditionInput | null,
+  filter?: ModelInventoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListInventoriesQuery = {
+  listInventories?:  {
+    __typename: "ModelInventoryConnection",
+    items:  Array< {
+      __typename: "Inventory",
+      productID: string,
+      warehouseID: string,
+      InventoryAmount: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1348,6 +1512,39 @@ export type OnDeleteSomethingSubscription = {
     __typename: "Something",
     id: string,
     whatabout?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateInventorySubscription = {
+  onCreateInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateInventorySubscription = {
+  onUpdateInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteInventorySubscription = {
+  onDeleteInventory?:  {
+    __typename: "Inventory",
+    productID: string,
+    warehouseID: string,
+    InventoryAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
