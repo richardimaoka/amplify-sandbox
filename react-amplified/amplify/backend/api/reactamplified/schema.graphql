@@ -36,3 +36,20 @@ type Inventory @model {
   warehouseID: ID!
   InventoryAmount: Int!
 }
+type Project @model {
+  id: ID!
+  name: String
+  team: Team @hasOne
+}
+
+type Team @model {
+  id: ID!
+  name: String!
+}
+
+type NewInventory @model {
+  productID: ID! @primaryKey(sortKeyFields: ["warehouseID", "regionID"])
+  warehouseID: ID!
+  regionID: ID!
+  InventoryAmount: Int!
+}

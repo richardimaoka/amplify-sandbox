@@ -262,3 +262,116 @@ export const listInventories = /* GraphQL */ `
     }
   }
 `;
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        team {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        projectTeamId
+      }
+      nextToken
+    }
+  }
+`;
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getNewInventory = /* GraphQL */ `
+  query GetNewInventory($productID: ID!, $warehouseID: ID!, $regionID: ID!) {
+    getNewInventory(
+      productID: $productID
+      warehouseID: $warehouseID
+      regionID: $regionID
+    ) {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNewInventories = /* GraphQL */ `
+  query ListNewInventories(
+    $productID: ID
+    $warehouseIDRegionID: ModelNewInventoryPrimaryCompositeKeyConditionInput
+    $filter: ModelNewInventoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listNewInventories(
+      productID: $productID
+      warehouseIDRegionID: $warehouseIDRegionID
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        productID
+        warehouseID
+        regionID
+        InventoryAmount
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

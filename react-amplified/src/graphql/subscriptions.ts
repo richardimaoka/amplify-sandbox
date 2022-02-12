@@ -368,3 +368,120 @@ export const onDeleteInventory = /* GraphQL */ `
     }
   }
 `;
+export const onCreateProject = /* GraphQL */ `
+  subscription OnCreateProject {
+    onCreateProject {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const onUpdateProject = /* GraphQL */ `
+  subscription OnUpdateProject {
+    onUpdateProject {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const onDeleteProject = /* GraphQL */ `
+  subscription OnDeleteProject {
+    onDeleteProject {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const onCreateTeam = /* GraphQL */ `
+  subscription OnCreateTeam {
+    onCreateTeam {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTeam = /* GraphQL */ `
+  subscription OnUpdateTeam {
+    onUpdateTeam {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTeam = /* GraphQL */ `
+  subscription OnDeleteTeam {
+    onDeleteTeam {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateNewInventory = /* GraphQL */ `
+  subscription OnCreateNewInventory {
+    onCreateNewInventory {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateNewInventory = /* GraphQL */ `
+  subscription OnUpdateNewInventory {
+    onUpdateNewInventory {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteNewInventory = /* GraphQL */ `
+  subscription OnDeleteNewInventory {
+    onDeleteNewInventory {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -422,3 +422,147 @@ export const deleteInventory = /* GraphQL */ `
     }
   }
 `;
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    createProject(input: $input, condition: $condition) {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    updateProject(input: $input, condition: $condition) {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    deleteProject(input: $input, condition: $condition) {
+      id
+      name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      projectTeamId
+    }
+  }
+`;
+export const createTeam = /* GraphQL */ `
+  mutation CreateTeam(
+    $input: CreateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    createTeam(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTeam = /* GraphQL */ `
+  mutation UpdateTeam(
+    $input: UpdateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    updateTeam(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTeam = /* GraphQL */ `
+  mutation DeleteTeam(
+    $input: DeleteTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    deleteTeam(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createNewInventory = /* GraphQL */ `
+  mutation CreateNewInventory(
+    $input: CreateNewInventoryInput!
+    $condition: ModelNewInventoryConditionInput
+  ) {
+    createNewInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateNewInventory = /* GraphQL */ `
+  mutation UpdateNewInventory(
+    $input: UpdateNewInventoryInput!
+    $condition: ModelNewInventoryConditionInput
+  ) {
+    updateNewInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteNewInventory = /* GraphQL */ `
+  mutation DeleteNewInventory(
+    $input: DeleteNewInventoryInput!
+    $condition: ModelNewInventoryConditionInput
+  ) {
+    deleteNewInventory(input: $input, condition: $condition) {
+      productID
+      warehouseID
+      regionID
+      InventoryAmount
+      createdAt
+      updatedAt
+    }
+  }
+`;

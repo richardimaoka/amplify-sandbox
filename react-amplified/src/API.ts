@@ -240,13 +240,18 @@ export type DeleteInventoryInput = {
   warehouseID: string,
 };
 
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
+export type CreateProjectInput = {
+  id?: string | null,
+  name?: string | null,
+  projectTeamId?: string | null,
+};
+
+export type ModelProjectConditionInput = {
   name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  and?: Array< ModelProjectConditionInput | null > | null,
+  or?: Array< ModelProjectConditionInput | null > | null,
+  not?: ModelProjectConditionInput | null,
+  projectTeamId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -263,6 +268,101 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type Project = {
+  __typename: "Project",
+  id: string,
+  name?: string | null,
+  team?: Team | null,
+  createdAt: string,
+  updatedAt: string,
+  projectTeamId?: string | null,
+};
+
+export type Team = {
+  __typename: "Team",
+  id: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateProjectInput = {
+  id: string,
+  name?: string | null,
+  projectTeamId?: string | null,
+};
+
+export type DeleteProjectInput = {
+  id: string,
+};
+
+export type CreateTeamInput = {
+  id?: string | null,
+  name: string,
+};
+
+export type ModelTeamConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelTeamConditionInput | null > | null,
+  or?: Array< ModelTeamConditionInput | null > | null,
+  not?: ModelTeamConditionInput | null,
+};
+
+export type UpdateTeamInput = {
+  id: string,
+  name?: string | null,
+};
+
+export type DeleteTeamInput = {
+  id: string,
+};
+
+export type CreateNewInventoryInput = {
+  productID: string,
+  warehouseID: string,
+  regionID: string,
+  InventoryAmount: number,
+};
+
+export type ModelNewInventoryConditionInput = {
+  InventoryAmount?: ModelIntInput | null,
+  and?: Array< ModelNewInventoryConditionInput | null > | null,
+  or?: Array< ModelNewInventoryConditionInput | null > | null,
+  not?: ModelNewInventoryConditionInput | null,
+};
+
+export type NewInventory = {
+  __typename: "NewInventory",
+  productID: string,
+  warehouseID: string,
+  regionID: string,
+  InventoryAmount: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateNewInventoryInput = {
+  productID: string,
+  warehouseID: string,
+  regionID: string,
+  InventoryAmount?: number | null,
+};
+
+export type DeleteNewInventoryInput = {
+  productID: string,
+  warehouseID: string,
+  regionID: string,
+};
+
+export type ModelTodoFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelTodoFilterInput | null > | null,
+  or?: Array< ModelTodoFilterInput | null > | null,
+  not?: ModelTodoFilterInput | null,
 };
 
 export type ModelTodoConnection = {
@@ -355,6 +455,66 @@ export enum ModelSortDirection {
 export type ModelInventoryConnection = {
   __typename: "ModelInventoryConnection",
   items:  Array<Inventory | null >,
+  nextToken?: string | null,
+};
+
+export type ModelProjectFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelProjectFilterInput | null > | null,
+  or?: Array< ModelProjectFilterInput | null > | null,
+  not?: ModelProjectFilterInput | null,
+  projectTeamId?: ModelIDInput | null,
+};
+
+export type ModelProjectConnection = {
+  __typename: "ModelProjectConnection",
+  items:  Array<Project | null >,
+  nextToken?: string | null,
+};
+
+export type ModelTeamFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelTeamFilterInput | null > | null,
+  or?: Array< ModelTeamFilterInput | null > | null,
+  not?: ModelTeamFilterInput | null,
+};
+
+export type ModelTeamConnection = {
+  __typename: "ModelTeamConnection",
+  items:  Array<Team | null >,
+  nextToken?: string | null,
+};
+
+export type ModelNewInventoryPrimaryCompositeKeyConditionInput = {
+  eq?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+  le?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+  lt?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+  ge?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+  gt?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+  between?: Array< ModelNewInventoryPrimaryCompositeKeyInput | null > | null,
+  beginsWith?: ModelNewInventoryPrimaryCompositeKeyInput | null,
+};
+
+export type ModelNewInventoryPrimaryCompositeKeyInput = {
+  warehouseID?: string | null,
+  regionID?: string | null,
+};
+
+export type ModelNewInventoryFilterInput = {
+  productID?: ModelIDInput | null,
+  warehouseID?: ModelIDInput | null,
+  regionID?: ModelIDInput | null,
+  InventoryAmount?: ModelIntInput | null,
+  and?: Array< ModelNewInventoryFilterInput | null > | null,
+  or?: Array< ModelNewInventoryFilterInput | null > | null,
+  not?: ModelNewInventoryFilterInput | null,
+};
+
+export type ModelNewInventoryConnection = {
+  __typename: "ModelNewInventoryConnection",
+  items:  Array<NewInventory | null >,
   nextToken?: string | null,
 };
 
@@ -844,6 +1004,171 @@ export type DeleteInventoryMutation = {
   } | null,
 };
 
+export type CreateProjectMutationVariables = {
+  input: CreateProjectInput,
+  condition?: ModelProjectConditionInput | null,
+};
+
+export type CreateProjectMutation = {
+  createProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type UpdateProjectMutationVariables = {
+  input: UpdateProjectInput,
+  condition?: ModelProjectConditionInput | null,
+};
+
+export type UpdateProjectMutation = {
+  updateProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type DeleteProjectMutationVariables = {
+  input: DeleteProjectInput,
+  condition?: ModelProjectConditionInput | null,
+};
+
+export type DeleteProjectMutation = {
+  deleteProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type CreateTeamMutationVariables = {
+  input: CreateTeamInput,
+  condition?: ModelTeamConditionInput | null,
+};
+
+export type CreateTeamMutation = {
+  createTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateTeamMutationVariables = {
+  input: UpdateTeamInput,
+  condition?: ModelTeamConditionInput | null,
+};
+
+export type UpdateTeamMutation = {
+  updateTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteTeamMutationVariables = {
+  input: DeleteTeamInput,
+  condition?: ModelTeamConditionInput | null,
+};
+
+export type DeleteTeamMutation = {
+  deleteTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateNewInventoryMutationVariables = {
+  input: CreateNewInventoryInput,
+  condition?: ModelNewInventoryConditionInput | null,
+};
+
+export type CreateNewInventoryMutation = {
+  createNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateNewInventoryMutationVariables = {
+  input: UpdateNewInventoryInput,
+  condition?: ModelNewInventoryConditionInput | null,
+};
+
+export type UpdateNewInventoryMutation = {
+  updateNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteNewInventoryMutationVariables = {
+  input: DeleteNewInventoryInput,
+  condition?: ModelNewInventoryConditionInput | null,
+};
+
+export type DeleteNewInventoryMutation = {
+  deleteNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetTodoQueryVariables = {
   id: string,
 };
@@ -1146,6 +1471,133 @@ export type ListInventoriesQuery = {
       __typename: "Inventory",
       productID: string,
       warehouseID: string,
+      InventoryAmount: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetProjectQueryVariables = {
+  id: string,
+};
+
+export type GetProjectQuery = {
+  getProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type ListProjectsQueryVariables = {
+  filter?: ModelProjectFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListProjectsQuery = {
+  listProjects?:  {
+    __typename: "ModelProjectConnection",
+    items:  Array< {
+      __typename: "Project",
+      id: string,
+      name?: string | null,
+      team?:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      projectTeamId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetTeamQueryVariables = {
+  id: string,
+};
+
+export type GetTeamQuery = {
+  getTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListTeamsQueryVariables = {
+  filter?: ModelTeamFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTeamsQuery = {
+  listTeams?:  {
+    __typename: "ModelTeamConnection",
+    items:  Array< {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetNewInventoryQueryVariables = {
+  productID: string,
+  warehouseID: string,
+  regionID: string,
+};
+
+export type GetNewInventoryQuery = {
+  getNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListNewInventoriesQueryVariables = {
+  productID?: string | null,
+  warehouseIDRegionID?: ModelNewInventoryPrimaryCompositeKeyConditionInput | null,
+  filter?: ModelNewInventoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListNewInventoriesQuery = {
+  listNewInventories?:  {
+    __typename: "ModelNewInventoryConnection",
+    items:  Array< {
+      __typename: "NewInventory",
+      productID: string,
+      warehouseID: string,
+      regionID: string,
       InventoryAmount: number,
       createdAt: string,
       updatedAt: string,
@@ -1544,6 +1996,126 @@ export type OnDeleteInventorySubscription = {
     __typename: "Inventory",
     productID: string,
     warehouseID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateProjectSubscription = {
+  onCreateProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type OnUpdateProjectSubscription = {
+  onUpdateProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type OnDeleteProjectSubscription = {
+  onDeleteProject?:  {
+    __typename: "Project",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type OnCreateTeamSubscription = {
+  onCreateTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateTeamSubscription = {
+  onUpdateTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteTeamSubscription = {
+  onDeleteTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNewInventorySubscription = {
+  onCreateNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateNewInventorySubscription = {
+  onUpdateNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
+    InventoryAmount: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteNewInventorySubscription = {
+  onDeleteNewInventory?:  {
+    __typename: "NewInventory",
+    productID: string,
+    warehouseID: string,
+    regionID: string,
     InventoryAmount: number,
     createdAt: string,
     updatedAt: string,
