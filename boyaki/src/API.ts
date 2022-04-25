@@ -75,7 +75,7 @@ export type ModelIntInput = {
 export type Post = {
   __typename: "Post",
   type: string,
-  id?: string | null,
+  id: string,
   content: string,
   owner?: string | null,
   timestamp: number,
@@ -112,6 +112,12 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelPostConnection = {
   __typename: "ModelPostConnection",
   items:  Array<Post | null >,
@@ -127,7 +133,7 @@ export type CreatePostMutation = {
   createPost?:  {
     __typename: "Post",
     type: string,
-    id?: string | null,
+    id: string,
     content: string,
     owner?: string | null,
     timestamp: number,
@@ -143,7 +149,7 @@ export type DeletePostMutation = {
   deletePost?:  {
     __typename: "Post",
     type: string,
-    id?: string | null,
+    id: string,
     content: string,
     owner?: string | null,
     timestamp: number,
@@ -158,7 +164,7 @@ export type GetPostQuery = {
   getPost?:  {
     __typename: "Post",
     type: string,
-    id?: string | null,
+    id: string,
     content: string,
     owner?: string | null,
     timestamp: number,
@@ -166,9 +172,11 @@ export type GetPostQuery = {
 };
 
 export type ListPostsQueryVariables = {
+  id?: string | null,
   filter?: ModelPostFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListPostsQuery = {
@@ -177,7 +185,53 @@ export type ListPostsQuery = {
     items:  Array< {
       __typename: "Post",
       type: string,
-      id?: string | null,
+      id: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListPostsBySpecificOwnerQueryVariables = {
+  owner: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsBySpecificOwnerQuery = {
+  listPostsBySpecificOwner?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      type: string,
+      id: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListPostsSortedByTimestampQueryVariables = {
+  timestamp: number,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsSortedByTimestampQuery = {
+  listPostsSortedByTimestamp?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      type: string,
+      id: string,
       content: string,
       owner?: string | null,
       timestamp: number,
