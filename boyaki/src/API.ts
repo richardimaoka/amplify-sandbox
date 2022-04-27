@@ -6,7 +6,7 @@ export type CreatePostInput = {
   type: string,
   id?: string | null,
   content: string,
-  owner?: string | null,
+  owner: string,
   timestamp: number,
 };
 
@@ -75,9 +75,9 @@ export type ModelIntInput = {
 export type Post = {
   __typename: "Post",
   type: string,
-  id: string,
+  id?: string | null,
   content: string,
-  owner?: string | null,
+  owner: string,
   timestamp: number,
 };
 
@@ -112,17 +112,17 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelPostConnection = {
   __typename: "ModelPostConnection",
   items:  Array<Post | null >,
   nextToken?: string | null,
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type CreatePostMutationVariables = {
   input: CreatePostInput,
@@ -133,9 +133,9 @@ export type CreatePostMutation = {
   createPost?:  {
     __typename: "Post",
     type: string,
-    id: string,
+    id?: string | null,
     content: string,
-    owner?: string | null,
+    owner: string,
     timestamp: number,
   } | null,
 };
@@ -149,9 +149,9 @@ export type DeletePostMutation = {
   deletePost?:  {
     __typename: "Post",
     type: string,
-    id: string,
+    id?: string | null,
     content: string,
-    owner?: string | null,
+    owner: string,
     timestamp: number,
   } | null,
 };
@@ -164,19 +164,17 @@ export type GetPostQuery = {
   getPost?:  {
     __typename: "Post",
     type: string,
-    id: string,
+    id?: string | null,
     content: string,
-    owner?: string | null,
+    owner: string,
     timestamp: number,
   } | null,
 };
 
 export type ListPostsQueryVariables = {
-  id?: string | null,
   filter?: ModelPostFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListPostsQuery = {
@@ -185,9 +183,32 @@ export type ListPostsQuery = {
     items:  Array< {
       __typename: "Post",
       type: string,
-      id: string,
+      id?: string | null,
       content: string,
-      owner?: string | null,
+      owner: string,
+      timestamp: number,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListPostsSortedByTimestampQueryVariables = {
+  type: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsSortedByTimestampQuery = {
+  listPostsSortedByTimestamp?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      type: string,
+      id?: string | null,
+      content: string,
+      owner: string,
       timestamp: number,
     } | null >,
     nextToken?: string | null,
@@ -208,32 +229,9 @@ export type ListPostsBySpecificOwnerQuery = {
     items:  Array< {
       __typename: "Post",
       type: string,
-      id: string,
+      id?: string | null,
       content: string,
-      owner?: string | null,
-      timestamp: number,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ListPostsSortedByTimestampQueryVariables = {
-  timestamp: number,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPostsSortedByTimestampQuery = {
-  listPostsSortedByTimestamp?:  {
-    __typename: "ModelPostConnection",
-    items:  Array< {
-      __typename: "Post",
-      type: string,
-      id: string,
-      content: string,
-      owner?: string | null,
+      owner: string,
       timestamp: number,
     } | null >,
     nextToken?: string | null,

@@ -15,11 +15,11 @@ type Post
       { allow: private, provider: userPools, operations: [read] }
     ]
   ) {
-  type: String! # always set to 'post'. used in the SortByTimestamp GSI
-  id: ID! @primaryKey
+  type: String!  # always set to 'post'. used in the SortByTimestamp GSI
+    @index(name: "SortByTimestamp", queryField: "listPostsSortedByTimestamp")
+  id: ID
   content: String!
-  owner: String
+  owner: String!
     @index(name: "BySpecificOwner", queryField: "listPostsBySpecificOwner")
   timestamp: Int!
-    @index(name: "SortByTimestamp", queryField: "listPostsSortedByTimestamp")
 }

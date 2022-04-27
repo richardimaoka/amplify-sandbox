@@ -3,14 +3,14 @@
   $util.error("sortDirection is not supported for List operations without a Sort key defined.", "InvalidArgumentsError")
 #end
 #set( $modelQueryExpression = {} )
-#if( !$util.isNull($ctx.args.timestamp) )
-  #set( $modelQueryExpression.expression = "#timestamp = :timestamp" )
+#if( !$util.isNull($ctx.args.type) )
+  #set( $modelQueryExpression.expression = "#type = :type" )
   #set( $modelQueryExpression.expressionNames = {
-  "#timestamp": "timestamp"
+  "#type": "type"
 } )
   #set( $modelQueryExpression.expressionValues = {
-  ":timestamp": {
-      "N": "$ctx.args.timestamp"
+  ":type": {
+      "S": "$ctx.args.type"
   }
 } )
 #end
