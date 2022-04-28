@@ -3,6 +3,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { Amplify } from "aws-amplify";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
@@ -54,10 +55,12 @@ function App() {
     <Authenticator>
       {({ signOut, user }) => (
         <ThemeProvider theme={theme}>
-          <main>
-            <h1>Hello {user ? user.username : ""}</h1>
-            <button onClick={signOut}>Sign out</button>
-          </main>
+          <BrowserRouter>
+            <main>
+              <h1>Hello {user ? user.username : ""}</h1>
+              <button onClick={signOut}>Sign out</button>
+            </main>
+          </BrowserRouter>
         </ThemeProvider>
       )}
     </Authenticator>
