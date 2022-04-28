@@ -1,6 +1,6 @@
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import { createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { Amplify } from "aws-amplify";
 import "./App.css";
@@ -53,10 +53,12 @@ function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        <main>
-          <h1>Hello {user ? user.username : ""}</h1>
-          <button onClick={signOut}>Sign out</button>
-        </main>
+        <ThemeProvider theme={theme}>
+          <main>
+            <h1>Hello {user ? user.username : ""}</h1>
+            <button onClick={signOut}>Sign out</button>
+          </main>
+        </ThemeProvider>
       )}
     </Authenticator>
   );
