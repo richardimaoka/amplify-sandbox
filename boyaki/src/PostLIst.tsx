@@ -33,7 +33,6 @@ export const PostList = ({
         borderRight: "1px solid #37444C",
       }}
     >
-      ssss
       {isLoading ? (
         <div
           style={{
@@ -72,14 +71,12 @@ export const PostList = ({
           ))}
           <ListItem
             alignItems="flex-start"
-            // className={classes.alignCenter}
             style={{ textAlign: "center" }}
             key="loadmore"
           >
             <ListItemText
               primary={
                 <Button variant="outlined" onClick={() => getAdditionalPosts()}>
-                  {" s"}
                   Read More{" "}
                 </Button>
               }

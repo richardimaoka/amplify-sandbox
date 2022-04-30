@@ -41,7 +41,7 @@ export const AllPosts = (): JSX.Element => {
     const res = (await API.graphql(
       graphqlOperation(listPostsSortedByTimestamp, {
         type: "post",
-        sortDirection: "DESC",
+        // sortDirection: "DESC",
         limit: 20, //default = 10
         nextToken: nextToken,
       })
@@ -80,7 +80,7 @@ export const AllPosts = (): JSX.Element => {
   }, []);
 
   return (
-    <React.Fragment>
+    <div style={{ display: "flex" }}>
       <SideBar activeListItem="global-timeline" />
       <PostList
         isLoading={isLoading}
@@ -88,6 +88,6 @@ export const AllPosts = (): JSX.Element => {
         getAdditionalPosts={getAdditionalPosts}
         listHeaderTitle={"Global Timeline"}
       />
-    </React.Fragment>
+    </div>
   );
 };
