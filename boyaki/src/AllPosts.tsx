@@ -64,7 +64,7 @@ export const AllPosts = (): JSX.Element => {
       <SideBar activeListItem="global-timeline" />
       <PostList
         isLoading={isLoading}
-        // posts={posts}
+        posts={posts}
         // getAdditionalPosts={getAdditionalPosts}
         listHeaderTitle={"Global Timeline"}
       />

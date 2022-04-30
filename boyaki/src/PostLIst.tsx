@@ -1,11 +1,13 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { Post } from "./API";
 
 // import { makeStyles } from "@material-ui/core/styles";
 // import {
@@ -57,16 +59,16 @@ const useStyles =
 
 interface PostListPros {
   isLoading: boolean;
-  // posts
+  posts: Post[];
   // getAdditionalPosts
   listHeaderTitle: string;
   // listHeaderTitleButton
 }
 export const PostList = ({
+  posts,
   isLoading,
   //   getAdditionalPosts,
   //   listHeaderTitleButton,
-  //   posts,
   listHeaderTitle,
 }: PostListPros) => {
   const classes = useStyles; //();
@@ -88,12 +90,12 @@ export const PostList = ({
               }
             </Typography>
           </ListItem>
-          {/* {posts.map((post) => (
+          {posts.map((post) => (
             <span>
               <PostItem post={post} />
               <Divider component="li" />
             </span>
-          ))} */}
+          ))}
           <ListItem
             alignItems="flex-start"
             // className={classes.alignCenter}
@@ -118,7 +120,11 @@ export const PostList = ({
   );
 };
 
-function PostItem({ post }: { post: any }) {
+interface PostItemProps {
+  post: Post;
+}
+
+function PostItem({ post }: PostItemProps) {
   // const classes = useStyles();
   // const history = useHistory();
   // const now = moment();
