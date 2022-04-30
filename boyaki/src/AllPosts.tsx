@@ -1,22 +1,23 @@
 import React, { useReducer, useState } from "react";
+import { Post } from "./API";
 import { PostList } from "./PostLIst";
-// import PostList from "../components/PostList";
 import { SideBar } from "./SideBar";
 
-const SUBSCRIPTION = "SUBSCRIPTION";
-const INITIAL_QUERY = "INITIAL_QUERY";
-const ADDITIONAL_QUERY = "ADDITIONAL_QUERY";
+type Action =
+  | { type: "SUBSCRIPTION"; post: Post }
+  | { type: "INITIAL_QUERY"; posts: Post[] }
+  | { type: "ADDITIONAL_QUERY"; posts: Post[] };
 
-const reducer = (state: any, action: any) => {
+const reducer = (posts: Post[], action: Action): Post[] => {
   switch (action.type) {
-    case INITIAL_QUERY:
+    case "INITIAL_QUERY":
       return action.posts;
-    case ADDITIONAL_QUERY:
-      return [...state, ...action.posts];
-    case SUBSCRIPTION:
-      return [action.post, ...state];
+    case "ADDITIONAL_QUERY":
+      return [...posts, ...action.posts];
+    case "SUBSCRIPTION":
+      return [action.post, ...posts];
     default:
-      return state;
+      return posts;
   }
 };
 
