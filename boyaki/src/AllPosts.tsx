@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from "react";
+import { PostList } from "./PostLIst";
 // import PostList from "../components/PostList";
 import { SideBar } from "./SideBar";
 
@@ -60,12 +61,12 @@ export const AllPosts = (): JSX.Element => {
   return (
     <React.Fragment>
       <SideBar activeListItem="global-timeline" />
-      {/* <PostList
-        isLoading={isLoading}
-        posts={posts}
-        getAdditionalPosts={getAdditionalPosts}
-        listHeaderTitle={"Global Timeline"}
-      /> */}
+      <PostList
+      // isLoading={isLoading}
+      // posts={posts}
+      // getAdditionalPosts={getAdditionalPosts}
+      // listHeaderTitle={"Global Timeline"}
+      />
     </React.Fragment>
   );
 };
