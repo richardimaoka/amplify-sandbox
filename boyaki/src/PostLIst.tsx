@@ -27,7 +27,7 @@ export const PostList = ({
   return (
     <div
       style={{
-        width: "100%",
+        width: "800px",
         wordBreak: "break-all",
         overflow: "scroll",
         borderRight: "1px solid #37444C",
