@@ -62,10 +62,10 @@ export const AllPosts = (): JSX.Element => {
     <React.Fragment>
       <SideBar activeListItem="global-timeline" />
       <PostList
-      // isLoading={isLoading}
-      // posts={posts}
-      // getAdditionalPosts={getAdditionalPosts}
-      // listHeaderTitle={"Global Timeline"}
+        isLoading={isLoading}
+        // posts={posts}
+        // getAdditionalPosts={getAdditionalPosts}
+        listHeaderTitle={"Global Timeline"}
       />
     </React.Fragment>
   );

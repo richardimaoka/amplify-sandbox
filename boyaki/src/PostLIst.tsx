@@ -55,17 +55,21 @@ const useStyles =
   };
 // }));
 
-export const PostList = (
-  {
-    //   isLoading,
-    //   posts,
-    //   getAdditionalPosts,
-    //   listHeaderTitle,
-    //   listHeaderTitleButton,
-  }
-) => {
+interface PostListPros {
+  isLoading: boolean;
+  // posts
+  // getAdditionalPosts
+  listHeaderTitle: string;
+  // listHeaderTitleButton
+}
+export const PostList = ({
+  isLoading,
+  //   getAdditionalPosts,
+  //   listHeaderTitleButton,
+  //   posts,
+  listHeaderTitle,
+}: PostListPros) => {
   const classes = useStyles; //();
-  const isLoading = false;
   const maxWidth = 100;
   return (
     // <div className={classes.listRoot}>
@@ -79,8 +83,9 @@ export const PostList = (
           <ListItem alignItems="flex-start">
             {/* <Typography variant="h5" fontWeight="fontWeightBold" maxWidth> */}
             <Typography variant="h5" fontWeight="fontWeightBold">
-              {/* {listHeaderTitle}
-              {listHeaderTitleButton && listHeaderTitleButton} */}
+              {
+                listHeaderTitle /*{listHeaderTitleButton && listHeaderTitleButton} */
+              }
             </Typography>
           </ListItem>
           {/* {posts.map((post) => (
