@@ -3,7 +3,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { Amplify } from "aws-amplify";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AllPosts } from "./AllPosts";
 import "./App.css";
 import awsExports from "./aws-exports";
@@ -57,7 +57,9 @@ function App() {
       {({ signOut, user }) => (
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <Route path="/" element={<AllPosts />} />
+            <Routes>
+              <Route path="/" element={<AllPosts />} />
+            </Routes>
           </BrowserRouter>
         </ThemeProvider>
       )}
