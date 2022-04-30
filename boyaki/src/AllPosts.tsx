@@ -1,6 +1,6 @@
 import { GraphQLResult } from "@aws-amplify/api";
 import { API, graphqlOperation } from "aws-amplify";
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import {
   ListPostsBySpecificOwnerQuery,
   ListPostsSortedByTimestampQuery,
@@ -66,18 +66,18 @@ export const AllPosts = (): JSX.Element => {
     getPosts("ADDITIONAL_QUERY", nextToken);
   };
 
-  // useEffect(() => {
-  //   getPosts(INITIAL_QUERY);
+  useEffect(() => {
+    getPosts("INITIAL_QUERY");
 
-  //   const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
-  //     next: (msg) => {
-  //       console.log("allposts subscription fired");
-  //       const post = msg.value.data.onCreatePost;
-  //       dispatch({ type: SUBSCRIPTION, post: post });
-  //     },
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, []);
+    // const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
+    //   next: (msg) => {
+    //     console.log("allposts subscription fired");
+    //     const post = msg.value.data.onCreatePost;
+    //     dispatch({ type: SUBSCRIPTION, post: post });
+    //   },
+    // });
+    // return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <React.Fragment>
