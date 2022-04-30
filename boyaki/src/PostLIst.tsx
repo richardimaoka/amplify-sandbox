@@ -62,13 +62,13 @@ interface PostListPros {
   posts: Post[];
   getAdditionalPosts: () => void;
   listHeaderTitle: string;
-  // listHeaderTitleButton
+  listHeaderTitleButton?: JSX.Element;
 }
 export const PostList = ({
   posts,
   isLoading,
-  //   getAdditionalPosts,
-  //   listHeaderTitleButton,
+  getAdditionalPosts,
+  listHeaderTitleButton,
   listHeaderTitle,
 }: PostListPros) => {
   const classes = useStyles; //();
@@ -85,9 +85,8 @@ export const PostList = ({
           <ListItem alignItems="flex-start">
             {/* <Typography variant="h5" fontWeight="fontWeightBold" maxWidth> */}
             <Typography variant="h5" fontWeight="fontWeightBold">
-              {
-                listHeaderTitle /*{listHeaderTitleButton && listHeaderTitleButton} */
-              }
+              {listHeaderTitle}
+              {listHeaderTitleButton && listHeaderTitleButton}
             </Typography>
           </ListItem>
           {posts.map((post) => (
@@ -105,10 +104,10 @@ export const PostList = ({
               primary={
                 <Button
                   variant="outlined"
-                  // onClick={() => getAdditionalPosts()}
+                  onClick={() => getAdditionalPosts()}
                   // className={classes.maxWidth}
                 >
-                  {" "}
+                  {" s"}
                   Read More{" "}
                 </Button>
               }
@@ -158,7 +157,7 @@ function PostItem({ post }: PostItemProps) {
         // className={classes.clickable}
         // onClick={() => history.push("/" + post.owner)}
         >
-          {/* <Avatar alt={post.owner} src="/" /> */}
+          <Avatar alt={post.owner} src="/" />
         </div>
       </ListItemAvatar>
       <ListItemText
@@ -173,7 +172,7 @@ function PostItem({ post }: PostItemProps) {
             </Typography>
           </React.Fragment>
         }
-        // secondary={<Typography color="textPrimary">{post.content}</Typography>}
+        secondary={<Typography color="textPrimary">{post.content}</Typography>}
       />
     </ListItem>
   );
