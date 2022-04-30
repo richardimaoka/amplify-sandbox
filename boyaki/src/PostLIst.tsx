@@ -60,7 +60,7 @@ const useStyles =
 interface PostListPros {
   isLoading: boolean;
   posts: Post[];
-  // getAdditionalPosts
+  getAdditionalPosts: () => void;
   listHeaderTitle: string;
   // listHeaderTitleButton
 }

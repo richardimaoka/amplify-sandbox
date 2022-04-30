@@ -1,5 +1,13 @@
+import { GraphQLResult } from "@aws-amplify/api";
+import { API, graphqlOperation } from "aws-amplify";
 import React, { useReducer, useState } from "react";
-import { Post } from "./API";
+import {
+  ListPostsBySpecificOwnerQuery,
+  ListPostsSortedByTimestampQuery,
+  Post,
+} from "./API";
+import { listPostsSortedByTimestamp } from "./graphql/queries";
+import { nonNullArray } from "./nonNullArray";
 import { PostList } from "./PostLIst";
 import { SideBar } from "./SideBar";
 
@@ -23,28 +31,40 @@ const reducer = (posts: Post[], action: Action): Post[] => {
 
 export const AllPosts = (): JSX.Element => {
   const [posts, dispatch] = useReducer(reducer, []);
-  const [nextToken, setNextToken] = useState(null);
+  const [nextToken, setNextToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const getPosts = async (type, nextToken = null) => {
-  //   const res = await API.graphql(
-  //     graphqlOperation(listPostsSortedByTimestamp, {
-  //       type: "post",
-  //       sortDirection: "DESC",
-  //       limit: 20, //default = 10
-  //       nextToken: nextToken,
-  //     })
-  //   );
-  //   console.log(res);
-  //   dispatch({ type: type, posts: res.data.listPostsSortedByTimestamp.items });
-  //   setNextToken(res.data.listPostsSortedByTimestamp.nextToken);
-  //   setIsLoading(false);
-  // };
+  const getPosts = async (
+    type: "INITIAL_QUERY" | "ADDITIONAL_QUERY" | "SUBSCRIPTION",
+    nextToken: string | null = null
+  ) => {
+    const res = (await API.graphql(
+      graphqlOperation(listPostsSortedByTimestamp, {
+        type: "post",
+        sortDirection: "DESC",
+        limit: 20, //default = 10
+        nextToken: nextToken,
+      })
+    )) as GraphQLResult<ListPostsSortedByTimestampQuery>;
+    console.log(res);
+    if (
+      res.data?.listPostsSortedByTimestamp?.items &&
+      res.data?.listPostsSortedByTimestamp?.nextToken
+    ) {
+      const items = nonNullArray(res.data.listPostsSortedByTimestamp.items);
+      dispatch({
+        type: "ADDITIONAL_QUERY",
+        posts: items,
+      });
+      setNextToken(res.data.listPostsSortedByTimestamp.nextToken);
+    }
+    setIsLoading(false);
+  };
 
-  // const getAdditionalPosts = () => {
-  //   if (nextToken === null) return; //Reached the last page
-  //   getPosts(ADDITIONAL_QUERY, nextToken);
-  // };
+  const getAdditionalPosts = () => {
+    if (nextToken === null) return; //Reached the last page
+    getPosts("ADDITIONAL_QUERY", nextToken);
+  };
 
   // useEffect(() => {
   //   getPosts(INITIAL_QUERY);
@@ -65,7 +85,7 @@ export const AllPosts = (): JSX.Element => {
       <PostList
         isLoading={isLoading}
         posts={posts}
-        // getAdditionalPosts={getAdditionalPosts}
+        getAdditionalPosts={getAdditionalPosts}
         listHeaderTitle={"Global Timeline"}
       />
     </React.Fragment>
