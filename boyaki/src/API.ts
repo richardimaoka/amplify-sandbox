@@ -237,3 +237,33 @@ export type ListPostsBySpecificOwnerQuery = {
     nextToken?: string | null,
   } | null,
 };
+
+export type OnCreatePostSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreatePostSubscription = {
+  onCreatePost?:  {
+    __typename: "Post",
+    type: string,
+    id?: string | null,
+    content: string,
+    owner: string,
+    timestamp: number,
+  } | null,
+};
+
+export type OnDeletePostSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeletePostSubscription = {
+  onDeletePost?:  {
+    __typename: "Post",
+    type: string,
+    id?: string | null,
+    content: string,
+    owner: string,
+    timestamp: number,
+  } | null,
+};
