@@ -1,13 +1,11 @@
-import { CognitoUserAmplify } from "@aws-amplify/ui";
 import { GraphQLResult } from "@aws-amplify/api";
+import { CognitoUserAmplify } from "@aws-amplify/ui";
 import { API, graphqlOperation } from "aws-amplify";
 import React, { useEffect, useReducer, useState } from "react";
-import {
-  ListPostsBySpecificOwnerQuery,
-  ListPostsSortedByTimestampQuery,
-  Post,
-} from "./API";
+import Observable from "zen-observable-ts";
+import { ListPostsSortedByTimestampQuery, Post } from "./API";
 import { listPostsSortedByTimestamp } from "./graphql/queries";
+import { onCreatePost } from "./graphql/subscriptions";
 import { nonNullArray } from "./nonNullArray";
 import { PostList } from "./PostLIst";
 import { SideBar } from "./SideBar";
@@ -74,14 +72,18 @@ export const AllPosts = ({ user }: AllPostsProps): JSX.Element => {
   useEffect(() => {
     getPosts("INITIAL_QUERY");
 
-    // const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
-    //   next: (msg) => {
-    //     console.log("allposts subscription fired");
-    //     const post = msg.value.data.onCreatePost;
-    //     dispatch({ type: SUBSCRIPTION, post: post });
-    //   },
-    // });
-    // return () => subscription.unsubscribe();
+    const client = API.graphql(
+      graphqlOperation(onCreatePost)
+    ) as Observable<any>;
+
+    const subscription = client.subscribe({
+      next: (msg) => {
+        console.log("allposts subscription fired");
+        const post = msg.value.data.onCreatePost;
+        dispatch({ type: "SUBSCRIPTION", post: post });
+      },
+    });
+    return () => subscription.unsubscribe();
   }, []);
 
   return (

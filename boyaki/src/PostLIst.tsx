@@ -66,7 +66,7 @@ export const PostList = ({
           </ListItem>
           {posts.map((post) => {
             return (
-              <span>
+              <span key={post.id}>
                 <PostItem post={post} />
                 <Divider component="li" />
               </span>
