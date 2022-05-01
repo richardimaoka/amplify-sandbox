@@ -29,7 +29,7 @@ export const PostList = ({
       style={{
         width: "800px",
         wordBreak: "break-all",
-        overflow: "scroll",
+        // overflow: "scroll",
         borderRight: "1px solid #37444C",
       }}
     >
@@ -58,17 +58,20 @@ export const PostList = ({
               variant="h5"
               fontWeight="fontWeightBold"
               style={{ width: "100%" }}
+              color={"#ffffff"}
             >
               {listHeaderTitle}
               {listHeaderTitleButton && listHeaderTitleButton}
             </Typography>
           </ListItem>
-          {posts.map((post) => (
-            <span>
-              <PostItem post={post} />
-              <Divider component="li" />
-            </span>
-          ))}
+          {posts.map((post) => {
+            return (
+              <span>
+                <PostItem post={post} />
+                <Divider component="li" />
+              </span>
+            );
+          })}
           <ListItem
             alignItems="flex-start"
             style={{ textAlign: "center" }}
@@ -96,7 +99,6 @@ function PostItem({ post }: PostItemProps) {
   // const classes = useStyles();
   // const history = useHistory();
   // const now = moment();
-  // console.log(now);
 
   // const calcTimestampDiff = (timestamp) => {
   //   const scales = [
@@ -119,7 +121,6 @@ function PostItem({ post }: PostItemProps) {
   // };
 
   return (
-    // <ListItem alignItems="flex-start" key={post.id}>
     <ListItem alignItems="flex-start" key={post.id}>
       <ListItemAvatar>
         <div
@@ -143,7 +144,7 @@ function PostItem({ post }: PostItemProps) {
             </Typography>
           </React.Fragment>
         }
-        secondary={<Typography color="textPrimary">{post.content}</Typography>}
+        secondary={<Typography>{post.content}</Typography>}
       />
     </ListItem>
   );

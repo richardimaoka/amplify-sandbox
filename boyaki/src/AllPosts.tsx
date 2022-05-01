@@ -35,7 +35,7 @@ export const AllPosts = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
 
   const getPosts = async (
-    type: "INITIAL_QUERY" | "ADDITIONAL_QUERY" | "SUBSCRIPTION",
+    type: "INITIAL_QUERY" | "ADDITIONAL_QUERY",
     nextToken: string | null = null
   ) => {
     const res = (await API.graphql(
@@ -46,14 +46,14 @@ export const AllPosts = (): JSX.Element => {
         nextToken: nextToken,
       })
     )) as GraphQLResult<ListPostsSortedByTimestampQuery>;
-    console.log(res);
+
     if (
       res.data?.listPostsSortedByTimestamp?.items &&
-      res.data?.listPostsSortedByTimestamp?.nextToken
+      res.data?.listPostsSortedByTimestamp?.nextToken !== undefined
     ) {
       const items = nonNullArray(res.data.listPostsSortedByTimestamp.items);
       dispatch({
-        type: "ADDITIONAL_QUERY",
+        type: type,
         posts: items,
       });
       setNextToken(res.data.listPostsSortedByTimestamp.nextToken);
