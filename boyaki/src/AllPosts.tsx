@@ -1,3 +1,4 @@
+import { CognitoUserAmplify } from "@aws-amplify/ui";
 import { GraphQLResult } from "@aws-amplify/api";
 import { API, graphqlOperation } from "aws-amplify";
 import React, { useEffect, useReducer, useState } from "react";
@@ -29,7 +30,11 @@ const reducer = (posts: Post[], action: Action): Post[] => {
   }
 };
 
-export const AllPosts = (): JSX.Element => {
+interface AllPostsProps {
+  user: CognitoUserAmplify;
+}
+
+export const AllPosts = ({ user }: AllPostsProps): JSX.Element => {
   const [posts, dispatch] = useReducer(reducer, []);
   const [nextToken, setNextToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -81,7 +86,7 @@ export const AllPosts = (): JSX.Element => {
 
   return (
     <div style={{ display: "flex" }}>
-      <SideBar activeListItem="global-timeline" />
+      <SideBar activeListItem="global-timeline" user={user} />
       <PostList
         isLoading={isLoading}
         posts={posts}

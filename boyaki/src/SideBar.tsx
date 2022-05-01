@@ -1,24 +1,46 @@
+import { CognitoUserAmplify } from "@aws-amplify/ui";
 import "@aws-amplify/ui-react/styles.css";
+import PersonIcon from "@mui/icons-material/Person";
+import PublicIcon from "@mui/icons-material/Public";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-import TextField from "@mui/material/TextField";
-import PublicIcon from "@mui/icons-material/Public";
-import PersonIcon from "@mui/icons-material/Person";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import TextField from "@mui/material/TextField";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import React from "react";
+import { createPost } from "./graphql/mutations";
 
-const drawerWidth = 340;
 const MAX_POST_CONTENT_LENGTH = 140;
 
 interface SideBarProps {
+  user: CognitoUserAmplify;
   activeListItem: string;
 }
 
-export const SideBar = ({ activeListItem }: SideBarProps): JSX.Element => {
+const generateUuid = (): string => {
+  // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
+  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
+  for (let i = 0, len = chars.length; i < len; i++) {
+    switch (chars[i]) {
+      case "x":
+        chars[i] = Math.floor(Math.random() * 16).toString(16);
+        break;
+      case "y":
+        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16);
+        break;
+    }
+  }
+  return chars.join("");
+};
+
+export const SideBar = ({
+  activeListItem,
+  user,
+}: SideBarProps): JSX.Element => {
   // const history = useHistory();
 
   const [value, setValue] = React.useState("");
@@ -39,17 +61,19 @@ export const SideBar = ({ activeListItem }: SideBarProps): JSX.Element => {
   };
 
   const onPost = async () => {
-    // const res = await API.graphql(
-    //   graphqlOperation(createPost, {
-    //     input: {
-    //       type: "post",
-    //       content: value,
-    //       timestamp: Math.floor(Date.now() / 1000),
-    //     },
-    //   })
-    // );
-    // console.log(res);
-    // setValue("");
+    const res = await API.graphql(
+      graphqlOperation(createPost, {
+        input: {
+          type: "post",
+          content: value,
+          id: generateUuid(),
+          owner: user.getUsername(),
+          timestamp: Math.floor(Date.now() / 1000),
+        },
+      })
+    );
+    console.log(res);
+    setValue("");
   };
 
   const signOut = () => {

@@ -1,8 +1,10 @@
 import { Authenticator } from "@aws-amplify/ui-react";
+import { CognitoUserAmplify } from "@aws-amplify/ui";
 import "@aws-amplify/ui-react/styles.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { Amplify } from "aws-amplify";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AllPosts } from "./AllPosts";
 import "./App.css";
@@ -54,15 +56,17 @@ const theme = createTheme({
 function App() {
   return (
     <Authenticator>
-      {({ signOut, user }) => (
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<AllPosts />} />
-            </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
-      )}
+      {({ signOut, user }) =>
+        user && (
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<AllPosts user={user} />} />
+              </Routes>
+            </BrowserRouter>
+          </ThemeProvider>
+        )
+      }
     </Authenticator>
   );
 }
